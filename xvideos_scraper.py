@@ -47,7 +47,7 @@ class xvideos_scrapper:
 
 		with open(fname, 'w', newline='', encoding= 'utf-8') as f:
 			writer = csv.writer(f)
-			headersf = ['title', 'total_time', 'vid_quality', 'view_ct', 'uploader_name', 'upvotes', 'downvotes', 'video_tags', 'comment_ct']
+			headersf = ['title', 'total_time', 'vid_quality', 'view_ct', 'uploader_name', 'upvotes', 'downvotes', 'video_tags', 'comment_ct', 'url']
 			writer.writerow(headersf)
 			for c in csv_data:
 				writer.writerow(c)
