@@ -51,7 +51,22 @@ class xvideos_scrapper:
 			writer.writerow(headersf)
 			for c in csv_data:
 				writer.writerow(c)
-		
+	
+	def create_data_list(self, url):
+		self.load_page(f'https://www.xvideos.com{url}')
+		data = []
+		data.append(self.get_title()) # kind of annoying, but you have to html.unescape these later
+		data.append(self.get_total_time())
+		data.append(self.get_video_quality())
+		data.append(self.get_view_count())
+		data.append(self.get_uploader_name())
+		data.append(self.get_upvotes())
+		data.append(self.get_downvotes())
+		data.append(self.get_video_tags())
+		data.append(self.get_comment_ct())
+		data.append(f'https://www.xvideos.com{url}')
+		return data
+
 	def get_uploader_name(self):
 		result = self.soup.findAll('span', {'class' : 'name'})	
 		for r in result:
@@ -89,19 +104,7 @@ class xvideos_scrapper:
 		
 
 
-	def create_data_list(self, url):
-		self.load_page(f'https://www.xvideos.com{url}')
-		data = []
-		data.append(self.get_title()) # kind of annoying, but you have to html.unescape these later
-		data.append(self.get_total_time())
-		data.append(self.get_video_quality())
-		data.append(self.get_view_count())
-		data.append(self.get_uploader_name())
-		data.append(self.get_upvotes())
-		data.append(self.get_downvotes())
-		data.append(self.get_video_tags())
-		data.append(self.get_comment_ct())
-		return data
+	
 
 	def get_all_data(self):
 		l_urls = self.get_all_urls()
@@ -155,9 +158,3 @@ class xvideos_scrapper:
 				l_urls.append(pot_hrefs)
 		return l_urls
 
-	
-xvs = xvideos_scrapper()
-
-
-terms = "anri okita"
-xvs.save_to_csv(terms)
