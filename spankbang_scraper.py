@@ -3,8 +3,9 @@ from bs4 import BeautifulSoup as bs
 import concurrent.futures
 import csv
 
-class spankbang_scrapper:
+class spankbang_scraper:
 	def __init__(self):
+		print('Spankbang Scraper is running...')
 		self.MAX_WORKERS = 6
 
 
@@ -54,6 +55,7 @@ class spankbang_scrapper:
 			writer.writerow(headersf)
 			for c in csv_data:
 				writer.writerow(c)
+		print('Scraping completed.')
 
 	def create_data_list(self, url):
 		self.load_page(f'https://www.spankbang.com{url}')
@@ -163,15 +165,3 @@ class spankbang_scrapper:
 		return l_urls
 		#print(l_urls)
 
-	
-svs = spankbang_scrapper()
-
-url = 'https://spankbang.com/3mg2l/video/anri+okita+got+big+bouncy+tits'
-#url = 'https://spankbang.com/tag/japanese,teen,schoolgirl/'
-#url = 'https://spankbang.com/tag/japanese,teen,schoolgirl/2/?period=all'
-#svs.load_page(url)
-tags = 'japanese teen schoolgirl'
-svs.save_to_csv(tags)
-
-#terms = "anri okita"
-#xvs.save_to_csv(terms)

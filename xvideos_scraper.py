@@ -3,9 +3,10 @@ from bs4 import BeautifulSoup as bs
 import concurrent.futures
 import csv
 
-class xvideos_scrapper:
+class xvideos_scraper:
 	def __init__(self):
 		self.MAX_WORKERS = 6
+		print('Xvideos Scraper is running...')
 
 
 	def load_page(self, url):
@@ -32,7 +33,7 @@ class xvideos_scrapper:
 	def get_view_count(self):
 		res = self.soup.findAll('strong')
 		for r in res:
-			return str(r.string)
+			return str(r.string.replace(',',''))
 
 	def get_total_time(self):
 		result = self.soup.findAll('span', {'class' : 'duration'})	
@@ -51,6 +52,7 @@ class xvideos_scrapper:
 			writer.writerow(headersf)
 			for c in csv_data:
 				writer.writerow(c)
+		print('Scraping completed.')
 	
 	def create_data_list(self, url):
 		self.load_page(f'https://www.xvideos.com{url}')
